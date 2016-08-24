@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dashboard="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:background="@drawable/tab_bg"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <com.dh.datadashboard.TabView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            dashboard:icon="@mipmap/icon_dashboard"
+            dashboard:color="#ff45c01a"
+            dashboard:text="当前"
+            dashboard:text_size="12sp"
+            />
+        <com.dh.datadashboard.TabView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            dashboard:icon="@mipmap/icon_data"
+            dashboard:color="#ff45c01a"
+            dashboard:text="汇总"
+            dashboard:text_size="12sp"
+            />
+        <com.dh.datadashboard.TabView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            dashboard:icon="@mipmap/icon_setting"
+            dashboard:color="#ff45c01a"
+            dashboard:text="设置"
+            dashboard:text_size="12sp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
