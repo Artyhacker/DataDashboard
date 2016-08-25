@@ -9,7 +9,9 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -29,7 +31,7 @@ public class TabView extends View {
     private Bitmap mBitmap;
     private Paint mPaint;
 
-    private float mAlpha = 1.0f;//透明度
+    private float mAlpha = 0;//透明度
 
     private Rect mIconRect;
     private Rect mTextBound;
@@ -105,7 +107,7 @@ public class TabView extends View {
         setupTargetBitmap(alpha);
 
         //绘制文本；文本变色
-        //drawSourceText(canvas, alpha);
+        drawSourceText(canvas, alpha);
 
         drawTargetText(canvas, alpha);
 
@@ -113,14 +115,7 @@ public class TabView extends View {
 
     }
 
-    private void drawTargetText(Canvas canvas, int alpha) {
-        mTextPaint.setColor(mColor);
-        mTextPaint.setAlpha(alpha);
 
-        int x = getMeasuredWidth() / 2 - mTextBound.width() / 2;
-        int y = mIconRect.bottom + mTextBound.height();
-        canvas.drawText(mText, x, y, mTextPaint);
-    }
 
 
     public void setIconAlpha(float alpha){
@@ -152,6 +147,15 @@ public class TabView extends View {
 
     }
 
+    private void drawTargetText(Canvas canvas, int alpha) {
+        mTextPaint.setColor(mColor);
+        mTextPaint.setAlpha(alpha);
+
+        int x = getMeasuredWidth() / 2 - mTextBound.width() / 2;
+        int y = mIconRect.bottom + mTextBound.height();
+        canvas.drawText(mText, x, y, mTextPaint);
+    }
+
     //在内存中绘制可变色的icon
     private void setupTargetBitmap(int alpha) {
 
@@ -172,5 +176,29 @@ public class TabView extends View {
         mCanvas.drawBitmap(mIconBitmap,null,mIconRect,mPaint);
 
 
+    }
+
+    private static final String INSTANCE_STATUS = "instance_status";
+    private static final String STATUS_ALPHA = "status_alpha";
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(INSTANCE_STATUS, super.onSaveInstanceState());
+        bundle.putFloat(STATUS_ALPHA, mAlpha);
+
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+
+        if(state instanceof Bundle){
+            Bundle bundle = (Bundle) state;
+            mAlpha = bundle.getFloat(STATUS_ALPHA);
+            super.onRestoreInstanceState(bundle.getParcelable(INSTANCE_STATUS));
+            return;
+        }
+        super.onRestoreInstanceState(state);
     }
 }

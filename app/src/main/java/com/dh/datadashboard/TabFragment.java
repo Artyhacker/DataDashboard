@@ -16,6 +16,7 @@ import android.widget.TextView;
  */
 public class TabFragment extends Fragment {
 
+
     private String mTitle = "Default";
     public static final String TITLE = "title";
 
@@ -34,4 +35,27 @@ public class TabFragment extends Fragment {
         tv.setGravity(Gravity.CENTER);
         return tv;
     }
+
+    /*
+    private DashboardView mDashboardView;
+    private DataView mDataView;
+    private SettingView mSettingView;
+
+    public static final String ITEM = "item";
+    private String mItem = "Default";
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        if(getArguments() != null){
+            mItem = getArguments().getString("0");
+        }
+        if(ITEM == "0")
+            return mDashboardView;
+        else if(ITEM == "1")
+            return mDataView;
+        else
+            return mSettingView;
+    }*/
 }
